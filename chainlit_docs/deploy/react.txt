@@ -1,0 +1,74 @@
+React
+Overview
+Chainlit allows you to create a custom frontend for your application, offering you the flexibility to design a unique user experience. By integrating your frontend with Chainlit’s backend, you can harness the full power of Chainlit’s features, including:
+
+
+
+
+Abstractions for easier development
+
+
+Monitoring and observability
+
+
+Seamless integrations with various tools
+
+
+Robust authentication mechanisms
+
+
+Support for multi-user environments
+
+
+Efficient data streaming capabilities
+
+
+
+
+Installation and Setup
+Learn how to install and set up the Chainlit React client.
+Usage
+Explore the key features provided by the React client.
+Additional Resources
+Explore additional resources for the React client.
+Custom React frontend
+Learn how to integrate your custom React frontend with the Chainlit backend.
+
+
+The 
+@chainlit/react-client
+ package is designed for integrating Chainlit applications with React. It offers several hooks and an API client for seamless connection and interaction.
+
+
+​
+Supported Features
+
+
+Message
+Streaming
+Elements
+Audio
+Ask User
+Chat History
+Chat Profiles
+Feedback
+✅
+✅
+✅
+✅
+✅
+✅
+✅
+✅
+Was this page helpful?
+Yes
+No
+Suggest edits
+Raise issue
+Web App
+Installation and setup
+github
+discord
+x
+linkedin
+Powered by Mintlify

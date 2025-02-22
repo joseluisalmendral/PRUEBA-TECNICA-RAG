@@ -1,0 +1,81 @@
+Literal AI - LLMOps
+Enterprise
+If your organization can’t use third party cloud services for data hosting, we can provide your company with a self-hostable Literal AI docker image (under commercial license).
+
+
+To request access you can contact us here ->
+
+https://forms.gle/BX3UNBLmTF75KgZVA
+.
+
+
+​
+Define your Literal AI Server
+
+
+Once you are hosting your own Literal AI instance, you can point to the server for data persistence.
+You will need to use the 
+LITERAL_API_URL
+ environment variable.
+
+
+Modify the 
+.env
+ file next to your Chainlit application.
+
+
+.env
+LITERAL_API_URL
+=
+"https://cloud.your_literal.com"
+
+
+
+
+Alternatively, inlined:
+
+
+LITERAL_API_URL
+=
+"https://cloud.your_literal.com"
+ chainlit run main.py
+
+
+
+
+​
+Activating Data Persistence
+
+
+Using your own Literal AI instance, you will still need to provide a valid API key to persist the data as described 
+here
+.
+
+
+Once activated, your chats and elements will be stored on your own server.
+
+
+​
+Debug Mode
+
+
+You can enable the new debug mode by adding 
+-d
+ to your 
+chainlit run
+ command. You will see a debug button below each message taking you to the trace/prompt playground.
+
+
+Debug example
+Was this page helpful?
+Yes
+No
+Suggest edits
+Raise issue
+Literal AI
+Overview
+github
+discord
+x
+linkedin
+Powered by Mintlify

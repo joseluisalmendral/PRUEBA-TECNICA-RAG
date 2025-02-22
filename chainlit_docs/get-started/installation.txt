@@ -1,0 +1,54 @@
+Get Started
+Installation
+Chainlit requires 
+python>=3.9
+.
+
+
+You can install Chainlit it via pip as follows:
+
+
+pip 
+install
+ chainlit
+
+
+
+
+This will make the 
+chainlit
+ command available on your system.
+
+
+Make sure everything runs smoothly:
+
+
+chainlit hello
+
+
+
+
+This should spawn the chainlit UI and ask for your name like so:
+
+
+
+​
+Next steps
+
+
+In Pure Python
+Learn on how to use Chainlit with any python code.
+Integrations
+Integrate Chainlit with other frameworks.
+Was this page helpful?
+Yes
+No
+Suggest edits
+Raise issue
+Overview
+In Pure Python
+github
+discord
+x
+linkedin
+Powered by Mintlify

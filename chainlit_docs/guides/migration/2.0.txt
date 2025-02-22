@@ -1,0 +1,171 @@
+Guides
+Migrate to Chainlit v2.0.0
+Join the discord for live updates: 
+https://discord.gg/AzyvDHWARx
+
+
+​
+Updating Chainlit
+
+
+Begin the migration by updating Chainlit to the latest version:
+
+
+pip 
+install
+ 
+--upgrade
+ chainlit
+
+
+
+
+​
+What changes?
+
+
+The Chainlit UI (including the copilot) has been completely re-written with Shadcn/Tailwind. This brings several advantages:
+
+
+
+
+The codebase is simpler and more contribution friendly.
+
+
+It enabled the new custom element feature.
+
+
+The theme customisation is more powerful.
+
+
+
+
+Full changelog available 
+here
+.
+
+
+​
+How to migrate?
+
+
+​
+1. Regenerate the config file
+
+
+The following fields have been removed from the 
+config.toml
+ file:
+
+
+
+
+follow_symlink
+: Chainlit no longer uses 
+StaticFiles
+ to serve files.
+
+
+font_family
+, 
+custom_font
+, 
+[UI.theme]
+: Theme customisation now uses a 
+separate file
+.
+
+
+audio
+: Chainlit audio streaming has been rework to match the 
+realtime APIs
+.
+
+
+
+
+You can either manually remove those field or remove the 
+.chainlit/config.toml
+ file and restart your application.
+
+
+​
+2. Cookie Auth & Cross Origins
+
+
+All of the authentication mechanisms now use cookie auth instead of directly using a JWT. This change makes Chainlit more secure.
+
+
+This does not require any change in your app code. However, this implies that Chainlit is now more picky about cross origins (for instance when using a copilot on a website).
+
+
+If you need to consume a Chainlit app on a different origin, make sure you allow it in the 
+config.toml
+ under 
+allow_origins
+.
+
+
+​
+3. Actions
+
+
+
+
+The 
+value
+ field has replaced with 
+payload
+ which accepts a Python dict. This makes actions more useful.
+
+
+The 
+description
+ field has been renamed 
+tooltip
+.
+
+
+The field 
+icon
+ has been added. You can use any lucide icon name.
+
+
+The 
+collapsed
+ field has been removed.
+
+
+
+
+​
+4. Copilot Widget Config
+
+
+
+
+The 
+fontFamily
+ field has been removed. Check the 
+new custom theme documentation
+.
+
+
+the 
+button.style
+ field has been replaced with 
+button.className
+. You can use any tailwind class to style the widget button.
+
+
+Was this page helpful?
+Yes
+No
+Suggest edits
+Raise issue
+Async / Sync
+github
+discord
+x
+linkedin
+Powered by Mintlify

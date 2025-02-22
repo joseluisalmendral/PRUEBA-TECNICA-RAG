@@ -1,0 +1,625 @@
+Basic Concepts
+Element
+Text messages are the building blocks of a chatbot, but we often want to send more than just text to the user such as images, videos, and more.
+
+
+That is where elements come in. Each element is a piece of content that can be attached to a 
+Message
+ or a 
+Step
+ and displayed on the user interface.
+
+
+Image Element
+Ideal to display generated images.
+PDF Element
+Ideal to display RAG sources.
+Custom Element
+Write your own element in JSX.
+More Elements
+The complete list of elements you can display on the user interface.
+
+
+​
+Example
+
+
+To attach an element to a message or step, we need to:
+
+
+
+
+Instantiate the element
+
+
+Attach the element to a message or step
+
+
+
+
+import
+ chainlit 
+as
+ cl
+
+
+
+
+
+
+@cl
+.
+on_chat_start
+
+
+async
+ 
+def
+ 
+start
+(
+)
+:
+
+
+    image 
+=
+ cl
+.
+Image
+(
+path
+=
+"./cat.jpeg"
+,
+ name
+=
+"image1"
+,
+ display
+=
+"inline"
+)
+
+
+
+
+    
+# Attach the image to the message
+
+
+    
+await
+ cl
+.
+Message
+(
+
+
+        content
+=
+"This message has an image!"
+,
+
+
+        elements
+=
+[
+image
+]
+,
+
+
+    
+)
+.
+send
+(
+)
+
+
+
+
+​
+Display Options
+
+
+There are 3 display options that determine how an element is rendered:
+
+
+​
+Side
+
+
+@cl
+.
+on_chat_start
+
+
+async
+ 
+def
+ 
+start
+(
+)
+:
+
+
+    
+# Notice the display option
+
+
+    image 
+=
+ cl
+.
+Image
+(
+path
+=
+"./cat.jpeg"
+,
+ name
+=
+"cat image"
+,
+ display
+=
+"side"
+)
+
+
+
+
+    
+await
+ cl
+.
+Message
+(
+
+
+        
+# Notice that the name of the image is referenced in the message content
+
+
+        content
+=
+"Here is the cat image!"
+,
+
+
+        elements
+=
+[
+image
+]
+,
+
+
+    
+)
+.
+send
+(
+)
+
+
+
+
+The image will not be displayed in the message. Instead, the name of the image will be displayed as clickable link.
+When the user clicks on the link, the image will be displayed on the side of the message.
+
+
+​
+Page
+
+
+@cl
+.
+on_chat_start
+
+
+async
+ 
+def
+ 
+start
+(
+)
+:
+
+
+    
+# Notice the display option
+
+
+    image 
+=
+ cl
+.
+Image
+(
+path
+=
+"./cat.jpeg"
+,
+ name
+=
+"cat image"
+,
+ display
+=
+"page"
+)
+
+
+
+
+    
+await
+ cl
+.
+Message
+(
+
+
+        
+# Notice that the name of the image is referenced in the message content
+
+
+        content
+=
+"Here is the cat image!"
+,
+
+
+        elements
+=
+[
+image
+]
+,
+
+
+    
+)
+.
+send
+(
+)
+
+
+
+
+The image will not be displayed in the message. Instead, the name of the image will be displayed as clickable link.
+Clicking on the link will redirect to a dedicated page where the image will be displayed.
+
+
+​
+Inline
+
+
+@cl
+.
+on_chat_start
+
+
+async
+ 
+def
+ 
+start
+(
+)
+:
+
+
+    
+# Notice the display option
+
+
+    image 
+=
+ cl
+.
+Image
+(
+path
+=
+"./cat.jpeg"
+,
+ name
+=
+"cat image"
+,
+ display
+=
+"inline"
+)
+
+
+
+
+    
+await
+ cl
+.
+Message
+(
+
+
+        
+# Notice that the name of the image is NOT referenced in the message content
+
+
+        content
+=
+"Hello!"
+,
+
+
+        elements
+=
+[
+image
+]
+,
+
+
+    
+)
+.
+send
+(
+)
+
+
+
+
+The image will be displayed below with the message regardless of whether the image name is referenced in the message content.
+
+
+​
+Control the Element Sidebar from Python
+
+
+You can open/close the sidebar directly in Python. Elements attached to the sidebar will not be persisted, as this sidebar state is not the result of an interaction in the UI.
+
+
+import
+ chainlit 
+as
+ cl
+
+
+
+
+
+
+@cl
+.
+on_chat_start
+
+
+async
+ 
+def
+ 
+start
+(
+)
+:
+
+
+    
+# Define the elements you want to display
+
+
+    elements 
+=
+ 
+[
+
+
+        cl
+.
+Image
+(
+path
+=
+"./cat.jpeg"
+,
+ name
+=
+"image1"
+)
+,
+
+
+        cl
+.
+Pdf
+(
+path
+=
+"./dummy.pdf"
+,
+ name
+=
+"pdf1"
+)
+,
+
+
+        cl
+.
+Text
+(
+content
+=
+"Here is a side text document"
+,
+ name
+=
+"text1"
+)
+,
+
+
+        cl
+.
+Text
+(
+content
+=
+"Here is a page text document"
+,
+ name
+=
+"text2"
+)
+,
+
+
+    
+]
+
+
+
+
+    
+# Setting elements will open the sidebar
+
+
+    
+await
+ cl
+.
+ElementSidebar
+.
+set_elements
+(
+elements
+)
+
+
+    
+await
+ cl
+.
+ElementSidebar
+.
+set_title
+(
+"Test title"
+)
+
+
+
+
+@cl
+.
+on_message
+
+
+async
+ 
+def
+ 
+message
+(
+msg
+:
+ cl
+.
+Message
+)
+:
+
+
+    
+# You can update the elements
+
+
+    
+await
+ cl
+.
+ElementSidebar
+.
+set_elements
+(
+[
+cl
+.
+Text
+(
+content
+=
+"Text changed!"
+)
+]
+)
+
+
+    
+# You can update the title
+
+
+    
+await
+ cl
+.
+ElementSidebar
+.
+set_title
+(
+"Title changed!"
+)
+
+
+
+
+    
+await
+ cl
+.
+sleep
+(
+2
+)
+
+
+
+
+    
+# Setting the elements to an empty array will close the sidebar
+
+
+    
+await
+ cl
+.
+ElementSidebar
+.
+set_elements
+(
+[
+]
+)
+
+
+Was this page helpful?
+Yes
+No
+Suggest edits
+Raise issue
+User Session
+Action
+github
+discord
+x
+linkedin
+Powered by Mintlify

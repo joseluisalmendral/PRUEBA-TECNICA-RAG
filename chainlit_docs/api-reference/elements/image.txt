@@ -1,0 +1,149 @@
+Elements
+Image
+The 
+Image
+ class is designed to create and handle image elements to be sent and displayed in the chatbot user interface.
+
+
+You must provide either an url or a path or content bytes.
+
+
+​
+Attributes
+
+
+​
+name
+str
+The name of the image to be displayed in the UI.
+
+
+​
+display
+ElementDisplay
+Determines how the image element should be displayed in the UI. Choices are
+“side”, “inline”, or “page”.
+
+
+​
+size
+ElementSize
+Determines the size of the image. Only works with display=“inline”. Choices
+are “small”, “medium” (default), or “large”.
+
+
+​
+url
+str
+The remote URL of the image source.
+
+
+​
+path
+str
+The local file path of the image.
+
+
+​
+content
+bytes
+The file content of the image in bytes format.
+
+
+​
+Example
+
+
+import
+ chainlit 
+as
+ cl
+
+
+
+
+
+
+@cl
+.
+on_chat_start
+
+
+async
+ 
+def
+ 
+start
+(
+)
+:
+
+
+    image 
+=
+ cl
+.
+Image
+(
+path
+=
+"./cat.jpeg"
+,
+ name
+=
+"image1"
+,
+ display
+=
+"inline"
+)
+
+
+
+
+    
+# Attach the image to the message
+
+
+    
+await
+ cl
+.
+Message
+(
+
+
+        content
+=
+"This message has an image!"
+,
+
+
+        elements
+=
+[
+image
+]
+,
+
+
+    
+)
+.
+send
+(
+)
+
+
+Was this page helpful?
+Yes
+No
+Suggest edits
+Raise issue
+Text
+Dataframe
+github
+discord
+x
+linkedin
+Powered by Mintlify

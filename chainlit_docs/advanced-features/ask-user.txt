@@ -1,0 +1,33 @@
+Advanced Features
+Ask User
+The ask APIs prompt the user for input. Depending on the API, the user input can be a string, a file, or pick an action.
+
+
+Until the user provides an input, both the UI and your code will be blocked.
+
+
+Ask File example
+
+
+​
+Available Ask APIs
+
+
+Text Input
+Ask the user for a string input.
+File
+Ask the user to upload a file.
+Action
+Ask the user to pick an action.
+Was this page helpful?
+Yes
+No
+Suggest edits
+Raise issue
+Streaming
+Multi-Modality
+github
+discord
+x
+linkedin
+Powered by Mintlify

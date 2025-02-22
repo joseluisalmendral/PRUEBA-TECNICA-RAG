@@ -1,0 +1,61 @@
+Life Cycle Hooks
+on_audio_chunk
+Hook to react to an incoming audio chunk from the user’s microphone.
+
+
+​
+Usage
+
+
+from
+ io 
+import
+ BytesIO
+
+
+import
+ chainlit 
+as
+ cl
+
+
+
+
+
+
+@cl
+.
+on_audio_chunk
+
+
+async
+ 
+def
+ 
+on_audio_chunk
+(
+chunk
+:
+ cl
+.
+InputAudioChunk
+)
+:
+
+
+    
+pass
+
+
+Was this page helpful?
+Yes
+No
+Suggest edits
+Raise issue
+on_logout
+on_audio_end
+github
+discord
+x
+linkedin
+Powered by Mintlify

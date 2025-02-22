@@ -1,0 +1,247 @@
+Elements
+PDF viewer
+The 
+Pdf
+ class allows you to display a PDF hosted remotely or locally in the chatbot UI. This class either takes a URL of a PDF hosted online, or the path of a local PDF.
+
+
+​
+Attributes
+
+
+​
+name
+str
+The name of the PDF to be displayed in the UI.
+
+
+​
+display
+ElementDisplay
+Determines how the PDF element should be displayed in the UI. Choices are
+“side”, “inline”, or “page”.
+
+
+​
+url
+str
+The remote URL of the PDF file. Must provide url for a remote PDF (or either
+path or content for a local PDF).
+
+
+​
+path
+str
+The local file path of the PDF. Must provide either path or content for a
+local PDF (or url for a remote PDF).
+
+
+​
+content
+bytes
+The file content of the PDF in bytes format. Must provide either path or
+content for a local PDF (or url for a remote PDF).
+
+
+​
+page
+int
+The default rendered page. Must be an integer greater than 0 and less than or
+equal to the total number of pages in the PDF. The default value is 1.
+
+
+​
+Example
+
+
+​
+Inline
+
+
+import
+ chainlit 
+as
+ cl
+
+
+
+
+
+
+@cl
+.
+on_chat_start
+
+
+async
+ 
+def
+ 
+main
+(
+)
+:
+
+
+    
+# Sending a pdf with the local file path
+
+
+    elements 
+=
+ 
+[
+
+
+      cl
+.
+Pdf
+(
+name
+=
+"pdf1"
+,
+ display
+=
+"inline"
+,
+ path
+=
+"./pdf1.pdf"
+,
+ page
+=
+1
+)
+
+
+    
+]
+
+
+
+
+    cl
+.
+Message
+(
+content
+=
+"Look at this local pdf!"
+,
+ elements
+=
+elements
+)
+.
+send
+(
+)
+
+
+
+
+​
+Side and Page
+
+
+You must have the name of the pdf in the content of the message for the link to be created.
+
+
+import
+ chainlit 
+as
+ cl
+
+
+
+
+
+
+@cl
+.
+on_chat_start
+
+
+async
+ 
+def
+ 
+main
+(
+)
+:
+
+
+    
+# Sending a pdf with the local file path
+
+
+    elements 
+=
+ 
+[
+
+
+      cl
+.
+Pdf
+(
+name
+=
+"pdf1"
+,
+ display
+=
+"side"
+,
+ path
+=
+"./pdf1.pdf"
+,
+ page
+=
+1
+)
+
+
+    
+]
+
+
+    
+# Reminder: The name of the pdf must be in the content of the message
+
+
+    
+await
+ cl
+.
+Message
+(
+content
+=
+"Look at this local pdf1!"
+,
+ elements
+=
+elements
+)
+.
+send
+(
+)
+
+
+Was this page helpful?
+Yes
+No
+Suggest edits
+Raise issue
+File
+Audio
+github
+discord
+x
+linkedin
+Powered by Mintlify

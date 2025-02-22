@@ -1,0 +1,143 @@
+Elements
+Video
+The 
+Video
+ class allows you to display an video player for a specific video file in the chatbot user interface.
+
+
+You must provide either an url or a path or content bytes.
+
+
+​
+Attributes
+
+
+​
+name
+str
+The name of the video file to be displayed in the UI. This is shown to users.
+
+
+​
+display
+ElementDisplay
+Determines where the element should be displayed in the UI. Choices are “side”
+(default), “inline”, or “page”.
+
+
+​
+url
+str
+The remote URL of the video.
+
+
+​
+path
+str
+The local file path of the video.
+
+
+​
+content
+bytes
+The file content of the video in bytes format.
+
+
+​
+Example
+
+
+import
+ chainlit 
+as
+ cl
+
+
+
+
+
+
+@cl
+.
+on_chat_start
+
+
+async
+ 
+def
+ 
+main
+(
+)
+:
+
+
+    elements 
+=
+ 
+[
+
+
+        cl
+.
+Video
+(
+name
+=
+"example.mp4"
+,
+ path
+=
+"./example.mp4"
+,
+ display
+=
+"inline"
+)
+,
+
+
+    
+]
+
+
+    
+await
+ cl
+.
+Message
+(
+
+
+        content
+=
+"Here is an video file"
+,
+
+
+        elements
+=
+elements
+,
+
+
+    
+)
+.
+send
+(
+)
+
+
+Was this page helpful?
+Yes
+No
+Suggest edits
+Raise issue
+Audio
+Plotly
+github
+discord
+x
+linkedin
+Powered by Mintlify

@@ -1,0 +1,28 @@
+Customisation
+Overview
+You can tailor your Chainlit Application to reflect your organization’s branding or personal style. Our intention is to provide a good level of customization to ensure a consistent user experience that aligns with your visual guidelines.
+
+
+In this section we will go through the different options available.
+
+
+Custom Logo and Favicon
+Learn how to display your own logo and favicon
+Custom CSS
+Learn how to provide your own CSS stylesheet.
+Translation Files
+Learn how to navigate and modify translation files for UI text customization.
+Theme
+Learn about creating your own theme.
+Was this page helpful?
+Yes
+No
+Suggest edits
+Raise issue
+OAuth
+Translation
+github
+discord
+x
+linkedin
+Powered by Mintlify

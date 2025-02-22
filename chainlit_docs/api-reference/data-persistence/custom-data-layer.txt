@@ -1,0 +1,188 @@
+Data persistence
+Custom Data Layer
+The 
+BaseDataLayer
+ class serves as an abstract foundation for data persistence operations within the Chainlit framework.
+This class outlines methods for managing users, feedback, elements, steps, and threads in a chatbot application.
+
+
+​
+Methods
+
+
+​
+async get_user(self, identifier: str)
+Coroutine
+Fetches a user by their identifier. Return type is optionally a 
+PersistedUser
+.
+
+
+​
+async create_user(self, user: User)
+Coroutine
+Creates a new user based on the 
+User
+ instance provided. Return type is optionally a 
+PersistedUser
+.
+
+
+​
+async upsert_feedback(self, feedback: Feedback)
+Coroutine
+Inserts or updates feedback. Accepts a 
+Feedback
+ instance and returns a string as an identifier of the persisted feedback.
+
+
+​
+async delete_feedback(self, feedback_id: str)
+Coroutine
+Deletes a feedback by 
+feedback_id
+. Return 
+True
+ if it was successful.
+
+
+​
+async create_element(self, element_dict: ElementDict)
+Coroutine
+Adds a new element to the data layer. Accepts 
+ElementDict
+ as an argument.
+
+
+​
+async get_element(self, thread_id: str, element_id: str)
+Coroutine
+Retrieves an element by 
+thread_id
+ and 
+element_id
+. Return type is optionally an 
+ElementDict
+.
+
+
+​
+async delete_element(self, element_id: str)
+Coroutine
+Deletes an element given its identifier 
+element_id
+.
+
+
+​
+async create_step(self, step_dict: StepDict)
+Coroutine
+Creates a new step in the data layer. Accepts 
+StepDict
+ as an argument.
+
+
+​
+async update_step(self, step_dict: StepDict)
+Coroutine
+Updates an existing step. Accepts 
+StepDict
+ as an argument.
+
+
+​
+async delete_step(self, step_id: str)
+Coroutine
+Deletes a step given its identifier 
+step_id
+.
+
+
+​
+async get_thread_author(self, thread_id: str)
+Coroutine
+Fetches the author of a given thread by 
+thread_id
+. Returns a string representing the author identifier.
+
+
+​
+async delete_thread(self, thread_id: str)
+Coroutine
+Deletes a thread given its identifier 
+thread_id
+.
+
+
+​
+async list_threads(self, pagination: Pagination, filters: ThreadFilter)
+Coroutine
+Lists threads based on 
+pagination
+ and 
+filters
+ arguments. Returns a 
+PaginatedResponse[ThreadDict]
+.
+
+
+​
+async get_thread(self, thread_id: str)
+Coroutine
+Retrieves a thread by its identifier 
+thread_id
+. Return type is optionally a 
+ThreadDict
+.
+
+
+​
+async update_thread(self, thread_id: str, name: Optional[str] = None, user_id: Optional[str] = None, metadata: Optional[Dict] = None, tags: Optional[List[str]] = None)
+Coroutine
+Updates a thread’s details like name, user_id, metadata, and tags. Arguments are mostly optional.
+
+
+​
+async delete_user_session(self, id: str)
+Coroutine
+Deletes a user session given its identifier 
+id
+. Returns a boolean value indicating success.
+
+
+​
+Decorators
+
+
+​
+queue_until_user_message()
+Decorator
+Queues certain methods to execute only after the first user message is received, especially useful for 
+WebsocketSessions
+.
+
+
+​
+Example
+
+
+Due to the abstract nature of 
+BaseDataLayer
+, direct instantiation and usage are not practical without subclassing and implementing the abstract methods.
+
+
+You can refer to the 
+guide for custom data layer implementation
+.
+Was this page helpful?
+Yes
+No
+Suggest edits
+Raise issue
+cache
+Window Messaging
+github
+discord
+x
+linkedin
+Powered by Mintlify

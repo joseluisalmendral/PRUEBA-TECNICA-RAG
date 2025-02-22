@@ -1,0 +1,170 @@
+Basic Concepts
+Action
+Actions are a way to send clickable buttons to the user interface. Each action is attached to a 
+Message
+ and can be used to trigger a python function when the user clicks on it.
+
+
+​
+Create an action
+
+
+Actions are sent to the UI through messages:
+
+
+import
+ chainlit 
+as
+ cl
+
+
+
+
+@cl
+.
+on_chat_start
+
+
+async
+ 
+def
+ 
+start
+(
+)
+:
+
+
+    
+# Sending an action button within a chatbot message
+
+
+    actions 
+=
+ 
+[
+
+
+        cl
+.
+Action
+(
+
+
+            name
+=
+"action_button"
+,
+
+
+            icon
+=
+"mouse-pointer-click"
+,
+
+
+            payload
+=
+{
+"value"
+:
+ 
+"example_value"
+}
+,
+
+
+            label
+=
+"Click me!"
+
+
+        
+)
+
+
+    
+]
+
+
+
+
+    
+await
+ cl
+.
+Message
+(
+content
+=
+"Interact with this action button:"
+,
+ actions
+=
+actions
+)
+.
+send
+(
+)
+
+
+
+
+​
+Define a Python Callback
+
+
+To handle the user’s click on the action button, you need to define a callback function with the 
+@cl.action_callback
+ decorator:
+
+
+@cl
+.
+action_callback
+(
+"action_button"
+)
+
+
+async
+ 
+def
+ 
+on_action
+(
+action
+:
+ cl
+.
+Action
+)
+:
+
+
+    
+print
+(
+action
+.
+payload
+)
+
+
+
+
+Action API
+Learn how more about Actions.
+Was this page helpful?
+Yes
+No
+Suggest edits
+Raise issue
+Element
+Command
+github
+discord
+x
+linkedin
+Powered by Mintlify

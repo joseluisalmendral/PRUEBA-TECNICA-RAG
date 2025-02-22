@@ -1,0 +1,33 @@
+Open Source Data Layers
+Official Data Layer
+Follow the steps in this repository to persist your conversations in 2 minutes:
+
+
+Official Data Layer
+Out-of-the-box data layer schema to store your threads, steps, feedback, etc.
+
+
+Do not forget to have your Chainlit application point to the database you set up by
+adding the 
+DATABASE_URL
+ environment variable in your 
+.env
+.
+If you wish to store elements, the same goes for your files system configuration.
+
+
+Custom element 
+props
+ are stored directly in PostgreSQL, not on cloud storage.
+Was this page helpful?
+Yes
+No
+Suggest edits
+Raise issue
+Overview
+SQLAlchemy Data Layer
+github
+discord
+x
+linkedin
+Powered by Mintlify

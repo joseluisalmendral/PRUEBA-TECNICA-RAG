@@ -1,0 +1,165 @@
+Config
+Features
+​
+Options
+
+
+​
+unsafe_allow_html
+bool
+default:
+false
+Process and display HTML in messages. This can be a security risk (see
+
+https://stackoverflow.com/questions/19603097/why-is-it-dangerous-to-render-user-generated-html-or-javascript
+).
+
+
+​
+edit_message
+bool
+default:
+true
+Allow the user to edit their messages.
+
+
+​
+latex
+bool
+default:
+false
+Process and display mathematical expressions. This can clash with ”$”
+characters in messages.
+
+
+​
+spontaneous_file_upload.enabled
+bool
+default:
+true
+Authorize users to upload files with messages. The files are then accessible
+in 
+cl.on_message
+.
+
+
+​
+spontaneous_file_upload.accept
+Union[List[str], Dict[str, List[str]]]
+default:
+["*/*"]
+Restrict user to only upload accepted mime file types. Example: [“text/plain”,
+“application/pdf”, “image/x-png”]
+
+
+​
+spontaneous_file_upload.max_files
+int
+default:
+20
+Restrict user to upload maximum number of files at a time.
+
+
+​
+spontaneous_file_upload.max_size_mb
+int
+default:
+500
+Restrict uploading file size (MB).
+
+
+​
+auto_tag_thread
+bool
+Automatically tag threads with the current chat profile (if a chat profile is
+used)
+
+
+​
+Default configuration
+
+
+[
+features
+]
+
+
+edit_message
+ 
+=
+ 
+true
+
+
+unsafe_allow_html
+ 
+=
+ 
+false
+
+
+latex
+ 
+=
+ 
+false
+
+
+[
+features.spontaneous_file_upload
+]
+
+
+    
+enabled
+ 
+=
+ 
+true
+
+
+    
+accept
+ 
+=
+ 
+[
+"*/*"
+]
+
+
+    
+max_files
+ 
+=
+ 
+20
+
+
+    
+max_size_mb
+ 
+=
+ 
+500
+
+
+auto_tag_thread
+ 
+=
+ 
+true
+
+
+Was this page helpful?
+Yes
+No
+Suggest edits
+Raise issue
+Project
+UI
+github
+discord
+x
+linkedin
+Powered by Mintlify

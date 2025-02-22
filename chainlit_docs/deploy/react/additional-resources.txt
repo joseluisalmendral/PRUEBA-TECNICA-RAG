@@ -1,0 +1,72 @@
+React
+Additional resources
+​
+Additional Resources
+
+
+
+
+
+
+@chainlit/react-client npm package
+
+
+Explore the @chainlit/react-client npm package.
+
+
+
+
+
+
+Recoil Documentation
+
+
+Learn more about setting up and using Recoil for state management in React applications.
+
+
+
+
+
+
+SWR Documentation
+
+
+Discover how to leverage SWR for data fetching, caching, and revalidation in React applications.
+
+
+
+
+
+
+Socket.IO Documentation
+
+
+Understand how real-time communication is handled via Socket.IO, integral to the 
+useChatInteract
+ hook’s operations.
+
+
+
+
+
+
+JWT Documentation
+
+
+Learn about JSON Web Tokens (JWT) and how they are used for secure authentication.
+
+
+
+
+Was this page helpful?
+Yes
+No
+Suggest edits
+Raise issue
+Usage
+Copilot
+github
+discord
+x
+linkedin
+Powered by Mintlify

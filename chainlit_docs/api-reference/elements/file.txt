@@ -1,0 +1,145 @@
+Elements
+File
+The 
+File
+ class allows you to display a button that lets users download the content of the file.
+
+
+You must provide either an url or a path or content bytes.
+
+
+​
+Attributes
+
+
+​
+name
+str
+The name of the file. This will be shown to users.
+
+
+​
+url
+str
+The remote URL of the file image source.
+
+
+​
+path
+str
+The local file path of the file image.
+
+
+​
+content
+bytes
+The file content of the file image in bytes format.
+
+
+​
+Example
+
+
+import
+ chainlit 
+as
+ cl
+
+
+
+
+
+
+@cl
+.
+on_chat_start
+
+
+async
+ 
+def
+ 
+start
+(
+)
+:
+
+
+    elements 
+=
+ 
+[
+
+
+        cl
+.
+File
+(
+
+
+            name
+=
+"hello.py"
+,
+
+
+            path
+=
+"./hello.py"
+,
+
+
+            display
+=
+"inline"
+,
+
+
+        
+)
+,
+
+
+    
+]
+
+
+
+
+    
+await
+ cl
+.
+Message
+(
+
+
+        content
+=
+"This message has a file element"
+,
+ elements
+=
+elements
+
+
+    
+)
+.
+send
+(
+)
+
+
+Was this page helpful?
+Yes
+No
+Suggest edits
+Raise issue
+Dataframe
+PDF viewer
+github
+discord
+x
+linkedin
+Powered by Mintlify

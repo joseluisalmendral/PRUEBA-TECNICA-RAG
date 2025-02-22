@@ -1,0 +1,245 @@
+Config
+UI
+​
+Options
+
+
+​
+name
+str
+default:
+"My Chatbot"
+The name of both the application and the chatbot.
+
+
+​
+description
+str
+The content of the 
+<meta name="description">
+ of the application.
+
+
+​
+cot
+Literal['hidden', 'tool_call', 'full']
+default:
+"full"
+The chain of thought (COT) is a feature that shows the user the steps the
+chatbot took to reach a conclusion. You can hide the COT, only show the tool
+calls, or show it in full.
+
+
+​
+default_collapse_content
+bool
+default:
+true
+When handling large text content we collapse it for keeping the threads
+concise. You can disable manually disable this behavior.
+
+
+​
+default_expand_message
+bool
+default:
+false
+Sub-messages are hiden by default, you can “expand” the parent message to show
+those messages. Toggling this setting will display the sub-messages by
+default.
+
+
+​
+github
+str
+Passing this option will display a Github-shaped link. If not passed we will
+display the link to Chainlit repo.
+
+
+​
+Default configuration
+
+
+[
+UI
+]
+
+
+# Name of the app and chatbot.
+
+
+name
+ 
+=
+ 
+"Chatbot"
+
+
+
+
+# Description of the app and chatbot. This is used for HTML tags.
+
+
+# description = ""
+
+
+
+
+# Large size content are by default collapsed for a cleaner ui
+
+
+default_collapse_content
+ 
+=
+ 
+true
+
+
+
+
+# The default value for the expand messages settings.
+
+
+default_expand_messages
+ 
+=
+ 
+false
+
+
+
+
+# Chain of Thought (CoT) display mode. Can be "hidden", "tool_call" or "full".
+
+
+cot
+ 
+=
+ 
+"full"
+
+
+
+
+# Link to your github repo. This will add a github button in the UI's header.
+
+
+# github = ""
+
+
+
+
+# Specify a CSS file that can be used to customize the user interface.
+
+
+# The CSS file can be served from the public directory or via an external link.
+
+
+# custom_css = "/public/test.css"
+
+
+
+
+[
+UI.theme
+]
+
+
+  
+#layout = "wide"
+
+
+  
+#font_family = "Inter, sans-serif"
+
+
+  
+# Override default MUI light theme. (Check theme.ts)
+
+
+  
+[
+UI.theme.light
+]
+
+
+      
+#background = "#FAFAFA"
+
+
+      
+#paper = "#FFFFFF"
+
+
+
+
+      
+[
+UI.theme.light.primary
+]
+
+
+          
+#main = "#F80061"
+
+
+          
+#dark = "#980039"
+
+
+          
+#light = "#FFE7EB"
+
+
+
+
+  
+# Override default MUI dark theme. (Check theme.ts)
+
+
+  
+[
+UI.theme.dark
+]
+
+
+      
+#background = "#FAFAFA"
+
+
+      
+#paper = "#FFFFFF"
+
+
+
+
+      
+[
+UI.theme.dark.primary
+]
+
+
+          
+#main = "#F80061"
+
+
+          
+#dark = "#980039"
+
+
+          
+#light = "#FFE7EB"
+
+
+Was this page helpful?
+Yes
+No
+Suggest edits
+Raise issue
+Features
+Environment Variables
+github
+discord
+x
+linkedin
+Powered by Mintlify

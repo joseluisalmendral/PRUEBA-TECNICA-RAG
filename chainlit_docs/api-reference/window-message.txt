@@ -1,0 +1,113 @@
+Misceallaneous
+Window Messaging
+​
+on_window_message
+
+
+Decorator to react to messages coming from the Web App’s parent window.
+The decorated function is called every time a new window message is received.
+
+
+​
+Parameters
+
+
+​
+message
+str
+The message coming from the Web App’s parent window.
+
+
+​
+Usage
+
+
+import
+ chainlit 
+as
+ cl
+
+
+
+
+@cl
+.
+on_window_message
+
+
+def
+ 
+main
+(
+message
+:
+ 
+str
+)
+:
+
+
+  
+# do something
+
+
+
+
+​
+send_window_message
+
+
+Function to send messages to the Web App’s parent window.
+
+
+​
+Parameters
+
+
+​
+message
+str
+The message to send to the Web App’s parent window.
+
+
+​
+Usage
+
+
+@cl
+.
+on_message
+
+
+async
+ 
+def
+ 
+message
+(
+)
+:
+
+
+  
+await
+ cl
+.
+send_window_message
+(
+"Server: Hello from Chainlit"
+)
+
+
+Was this page helpful?
+Yes
+No
+Suggest edits
+Raise issue
+Custom Data Layer
+Select
+github
+discord
+x
+linkedin
+Powered by Mintlify

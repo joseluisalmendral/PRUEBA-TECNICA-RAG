@@ -1,0 +1,149 @@
+Misceallaneous
+cache
+The 
+cache
+ decorator is a tool for caching results of resource-intensive calculations or loading processes. It can be conveniently combined with the 
+file watcher
+ to prevent resource reloading each time the application restarts. This not only saves time, but also enhances overall efficiency.
+
+
+​
+Parameters
+
+
+​
+func
+Callable
+The target function whose results need to be cached.
+
+
+​
+Returns
+
+
+​
+cached_value
+Any
+required
+The computed value that is stored in the cache after its initial calculation.
+
+
+​
+Usage
+
+
+import
+ time
+
+
+import
+ chainlit 
+as
+ cl
+
+
+
+
+@cl
+.
+cache
+
+
+def
+ 
+to_cache
+(
+)
+:
+
+
+    time
+.
+sleep
+(
+5
+)
+  
+# Simulate a time-consuming process
+
+
+    
+return
+ 
+"Hello!"
+
+
+
+
+value 
+=
+ to_cache
+(
+)
+
+
+
+
+@cl
+.
+on_message
+
+
+async
+ 
+def
+ 
+main
+(
+message
+:
+ cl
+.
+Message
+)
+:
+
+
+    
+await
+ cl
+.
+Message
+(
+
+
+        content
+=
+value
+,
+
+
+    
+)
+.
+send
+(
+)
+
+
+
+
+In this example, the 
+to_cache
+ function simulates a time-consuming process that returns a value. By using the 
+cl.cache
+ decorator, the result of the function is cached after its first execution. Future calls to the 
+to_cache
+ function return the cached value without running the time-consuming process again.
+Was this page helpful?
+Yes
+No
+Suggest edits
+Raise issue
+make_async
+Custom Data Layer
+github
+discord
+x
+linkedin
+Powered by Mintlify

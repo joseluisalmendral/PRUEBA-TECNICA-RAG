@@ -1,0 +1,97 @@
+Examples
+Community
+​
+Videos
+
+
+
+
+Build Python LLM apps in minutes Using Chainlit ⚡️
+ from 
+Krish Naik
+
+
+Build an Arxiv QA Chat Application in Minutes!
+ from 
+Chris Alexiuk
+
+
+Chainlit: Build LLM Apps in MINUTES!
+ from 
+WorldOfAI
+
+
+Now Build & Share LLM Apps Super Fast with Chainlit
+ from 
+Sunny Bhaveen Chandra
+
+
+Chainlit CrashCourse - Build LLM ChatBot with Chainlit and Python & GPT
+ from 
+JCharisTech
+
+
+Chat with … anything
+ by 
+Waseem H
+
+
+Unleash the Power of Falcon with LangChain: Step-by-Step Guide to Run Chat App using Chainlit
+ by 
+Menlo Park Lab
+
+
+Chainlit tutorial series
+ (in chinese) by 
+01coder
+
+
+
+
+​
+Articles
+
+
+
+
+AI Agents tutorial: How to create information retrieval Chatbot
+ from 
+Jakub Misiło
+
+
+Create an Azure OpenAI, LangChain, ChromaDB, and Chainlit Chat App in Container Apps using Terraform
+ from 
+Paolo Salvatori
+
+
+Create A Chatbot with Internet Connectivity Powered by Langchain and Chainlit
+ from 
+Yeyu Hang
+
+
+For Chatbot Development, Streamlit Is Good, But Chainlit Is Better
+ from 
+Yeyu Hang
+
+
+Build and Deploy a Chat App Powered by LangChain and Chainlit using Docker
+ from 
+MA Raza, Ph.D.
+
+
+
+
+Note that some of those tutorials might use the old sync version of the package. See the 
+Migration Guide
+ to update those!
+Was this page helpful?
+Yes
+No
+Suggest edits
+Raise issue
+Security - PII
+github
+discord
+x
+linkedin
+Powered by Mintlify

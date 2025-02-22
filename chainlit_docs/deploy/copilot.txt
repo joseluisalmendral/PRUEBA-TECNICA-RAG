@@ -1,0 +1,833 @@
+Platforms
+Copilot
+Software Copilot are a new kind of assistant embedded in your app/product. They are designed to help users get the most out of your app by providing contextual guidance and take actions on their behalf.
+
+
+Preview
+
+
+Contact us
+ to get advice on how to ship
+reliable and secure AI Copilots or Assistants in your product.
+
+
+​
+Supported Features
+
+
+Message
+Streaming
+Elements
+Audio
+Ask User
+Chat History
+Chat Profiles
+Feedback
+✅
+✅
+✅
+✅
+✅
+❌
+✅
+✅
+
+
+​
+Embedding the Copilot
+
+
+First, make sure your Chainlit server is running. Then, add the following script at the end of your website’s 
+<body>
+ tag:
+
+
+This example assumes your Chainlit server is running on
+
+http://localhost:8000
+
+
+<
+head
+>
+
+
+  
+<
+meta
+ 
+charset
+=
+"
+utf-8
+"
+ 
+/>
+
+
+</
+head
+>
+
+
+<
+body
+>
+
+
+  
+<!-- ... -->
+
+
+  
+<
+script
+ 
+src
+=
+"
+http://localhost:8000/copilot/index.js
+"
+>
+</
+script
+>
+
+
+  
+<
+script
+>
+
+
+    window.addEventListener("chainlit-call-fn", (e) => {
+
+
+      const { name, args, callback } = e.detail;
+
+
+      callback("You sent: " + args.msg);
+
+
+    });
+
+
+  
+</
+script
+>
+
+
+  
+<
+script
+>
+
+
+    window.mountChainlitWidget({
+
+
+      chainlitServer: "http://localhost:8000",
+
+
+    });
+
+
+  
+</
+script
+>
+
+
+</
+body
+>
+
+
+
+
+Remember the HTML file has to be served by a server, opening it directly in
+your browser won’t work. You can use simple HTTP server for tests purpose.
+
+
+That’s it! You should now see a floating button on the bottom right corner of your website. Clicking on it will open the Copilot.
+
+
+You can programmatically toggle the copilot with 
+window.toggleChainlitCopilot()
+.
+
+
+​
+Widget Configuration
+
+
+The 
+mountChainlitWidget
+ function accepts the following options:
+
+
+export
+ 
+interface
+ 
+IWidgetConfig
+ 
+{
+
+
+  
+// URL of the Chainlit server
+
+
+  chainlitServer
+:
+ 
+string
+;
+
+
+  
+// Required if authentication is enabled on the server
+
+
+  accessToken
+?
+:
+ 
+string
+;
+
+
+  
+// Theme of the copilot
+
+
+  theme
+?
+:
+ 
+"light"
+ 
+|
+ 
+"dark"
+;
+
+
+  
+// Custom styling to apply to the widget button
+
+
+  button
+?
+:
+ 
+{
+
+
+    
+// ID of the container element to mount the button to
+
+
+    containerId
+?
+:
+ 
+string
+;
+
+
+    
+// URL of the image to use as the button icon
+
+
+    imageUrl
+?
+:
+ 
+string
+;
+
+
+    
+// The tailwind classname to apply to the button
+
+
+    className
+?
+:
+ 
+string
+;
+
+
+  
+}
+;
+
+
+}
+
+
+
+
+​
+Function Calling
+
+
+The Copilot can call functions on your website. This is useful for taking actions on behalf of the user. For example, you can call a function to create a new document, or to open a modal.
+
+
+First, create a 
+CopilotFunction
+ in your Chainlit server:
+
+
+import
+ chainlit 
+as
+ cl
+
+
+
+
+
+
+@cl
+.
+on_message
+
+
+async
+ 
+def
+ 
+on_message
+(
+msg
+:
+ cl
+.
+Message
+)
+:
+
+
+    
+if
+ cl
+.
+context
+.
+session
+.
+client_type 
+==
+ 
+"copilot"
+:
+
+
+        fn 
+=
+ cl
+.
+CopilotFunction
+(
+name
+=
+"test"
+,
+ args
+=
+{
+"msg"
+:
+ msg
+.
+content
+}
+)
+
+
+        res 
+=
+ 
+await
+ fn
+.
+acall
+(
+)
+
+
+        
+await
+ cl
+.
+Message
+(
+content
+=
+res
+)
+.
+send
+(
+)
+
+
+
+
+Then, in your app/website, add the following event listener:
+
+
+window
+.
+addEventListener
+(
+"chainlit-call-fn"
+,
+ 
+(
+e
+)
+ 
+=>
+ 
+{
+
+
+  
+const
+ 
+{
+ name
+,
+ args
+,
+ callback 
+}
+ 
+=
+ e
+.
+detail
+;
+
+
+  
+if
+ 
+(
+name 
+===
+ 
+"test"
+)
+ 
+{
+
+
+    
+console
+.
+log
+(
+name
+,
+ args
+)
+;
+
+
+    
+callback
+(
+"You sent: "
+ 
++
+ args
+.
+msg
+)
+;
+
+
+  
+}
+
+
+}
+)
+;
+
+
+
+
+As you can see, the event listener receives the function name, arguments, and a callback function. The callback function should be called with the result of the function call.
+
+
+​
+Send a Message
+
+
+The Copilot can also send messages directly to the Chainlit server. This is useful for sending context information or user actions to the Chainlit server (like the user selected from cell A1 to B1 on a table).
+
+
+First, update the 
+@cl.on_message
+ decorated function to your Chainlit server:
+
+
+import
+ chainlit 
+as
+ cl
+
+
+
+
+
+
+@cl
+.
+on_message
+
+
+async
+ 
+def
+ 
+on_message
+(
+msg
+:
+ cl
+.
+Message
+)
+:
+
+
+    
+if
+ cl
+.
+context
+.
+session
+.
+client_type 
+==
+ 
+"copilot"
+:
+
+
+
+
+        
+if
+ msg
+.
+type
+ 
+==
+ 
+"system_message"
+:
+
+
+          
+# do something with the message
+
+
+          
+return
+
+
+
+
+        fn 
+=
+ cl
+.
+CopilotFunction
+(
+name
+=
+"test"
+,
+ args
+=
+{
+"msg"
+:
+ msg
+.
+content
+}
+)
+
+
+        res 
+=
+ 
+await
+ fn
+.
+acall
+(
+)
+
+
+        
+await
+ cl
+.
+Message
+(
+content
+=
+res
+)
+.
+send
+(
+)
+
+
+
+
+Then, in your app/website, you can emit an event like this:
+
+
+window
+.
+sendChainlitMessage
+(
+{
+
+
+  
+type
+:
+ 
+"system_message"
+,
+
+
+  
+output
+:
+ 
+"Hello World!"
+,
+
+
+}
+)
+;
+
+
+
+
+​
+Security
+
+
+​
+Cross Origin Resource Sharing (CORS)
+
+
+Don’t forget to add the origin of the host website to the 
+allow_origins
+ config field to a list of allowed origins.
+
+
+​
+Authentication
+
+
+If you want to authenticate users on the Copilot, you can enable 
+authentication
+ on the Chainlit server.
+
+
+If the Chainlit app and the host website are deployed on different domains,
+you will have to add 
+CHAINLIT_COOKIE_SAMESITE=none
+ to the Chainlit app env
+variables.
+
+
+While the standalone Chainlit application handles the authentication process, the Copilot needs to be configured with an access token. This token is used to authenticate the user with the Chainlit server.
+
+
+The host app/website is responsible for generating the token and passing it to the as 
+accessToken
+. Here are examples of how to generate the token in different languages:
+
+
+You will need the 
+CHAINLIT_AUTH_SECRET
+ you generated when 
+configuring
+authentication
+.
+
+
+jwt.py
+jwt.ts
+import
+ jwt
+
+
+from
+ datetime 
+import
+ datetime
+,
+ timedelta
+
+
+
+
+CHAINLIT_AUTH_SECRET 
+=
+ 
+"your-secret"
+
+
+
+
+def
+ 
+create_jwt
+(
+identifier
+:
+ 
+str
+,
+ metadata
+:
+ 
+dict
+)
+ 
+-
+>
+ 
+str
+:
+
+
+    to_encode 
+=
+ 
+{
+
+
+      
+"identifier"
+:
+ identifier
+,
+
+
+      
+"metadata"
+:
+ metadata
+,
+
+
+      
+"exp"
+:
+ datetime
+.
+utcnow
+(
+)
+ 
++
+ timedelta
+(
+minutes
+=
+60
+ 
+*
+ 
+24
+ 
+*
+ 
+15
+)
+,
+  
+# 15 days
+
+
+      
+}
+
+
+
+
+    encoded_jwt 
+=
+ jwt
+.
+encode
+(
+to_encode
+,
+ CHAINLIT_AUTH_SECRET
+,
+ algorithm
+=
+"HS256"
+)
+
+
+    
+return
+ encoded_jwt
+
+
+
+
+access_token 
+=
+ create_jwt
+(
+"user-1"
+,
+ 
+{
+"name"
+:
+ 
+"John Doe"
+}
+)
+
+
+Was this page helpful?
+Yes
+No
+Suggest edits
+Raise issue
+Additional resources
+Teams
+github
+discord
+x
+linkedin
+Powered by Mintlify
