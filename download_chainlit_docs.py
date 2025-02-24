@@ -3,6 +3,12 @@ import time
 import requests
 from urllib.parse import urljoin, urlparse
 from bs4 import BeautifulSoup
+from collections import deque
+from tqdm import tqdm
+from colorama import init, Fore, Style
+
+# Inicializar colorama para que los colores se reseteen automáticamente
+init(autoreset=True)
 
 # Opcional: instalar html2text si se desea utilizar formato Markdown
 try:
@@ -44,7 +50,7 @@ def convert_content(content: str) -> str:
     soup = BeautifulSoup(content, "html.parser")
     content_div = soup.find("div", id="content-area")
     if content_div is None:
-        print("Advertencia: No se encontró el div con id 'content-area'. Se usará todo el contenido.")
+        print(Fore.YELLOW + "Advertencia: No se encontró el div con id 'content-area'. Se usará todo el contenido.")
         content_div = soup
 
     if OUTPUT_FORMAT == "txt":
@@ -69,7 +75,7 @@ def save_page(url: str, content: str):
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         f.write(converted)
-    print(f"Guardado: {url} -> {path}")
+    print(Fore.BLUE + f"Guardado: {url} -> {path}")
 
 def get_internal_links(url: str, content: str) -> set:
     """
@@ -85,29 +91,46 @@ def get_internal_links(url: str, content: str) -> set:
             links.add(cleaned_url)
     return links
 
-def crawl(url: str):
+def crawl_all(start_url: str):
     """
-    Función recursiva que descarga la página, guarda el contenido dentro de 'content-area'
-    y sigue los enlaces internos, respetando un tiempo de espera entre peticiones.
+    Función iterativa que descarga la página, guarda el contenido dentro de 'content-area'
+    y sigue los enlaces internos, mostrando una barra de progreso.
     """
-    if url in visited:
-        return
-    visited.add(url)
-    try:
-        response = requests.get(url)
-        response.raise_for_status()
-        content = response.text
-        save_page(url, content)
-        # Extraer enlaces internos y recorrerlos
-        links = get_internal_links(url, content)
-        for link in links:
-            if link not in visited:
-                time.sleep(REQUEST_DELAY)  # Espera antes de la siguiente petición
-                crawl(link)
-    except requests.RequestException as e:
-        print(f"Error al acceder a {url}: {e}")
+    pending = deque([start_url])
+    pbar = tqdm(total=1, desc="Progreso", bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} urls")
+    while pending:
+        url = pending.popleft()
+        if url in visited:
+            continue
+        visited.add(url)
+        try:
+            response = requests.get(url)
+            response.raise_for_status()
+            content = response.text
+            save_page(url, content)
+            links = get_internal_links(url, content)
+            for link in links:
+                if link not in visited and link not in pending:
+                    pending.append(link)
+                    pbar.total += 1  # Incrementa el total de URLs a procesar
+        except requests.RequestException as e:
+            print(Fore.RED + f"Error al acceder a {url}: {e}")
+        pbar.update(1)
+        pbar.refresh()
+        time.sleep(REQUEST_DELAY)
+    pbar.close()
 
 if __name__ == "__main__":
-    print(f"Iniciando la descarga de la documentación desde {BASE_URL}")
-    crawl(BASE_URL)
-    print("Descarga completada.")
+    # Mensaje de inicio con colores y espacios para resaltar la situación inicial
+    print("\n" + Fore.YELLOW + Style.BRIGHT + "==========================================")
+    print(Fore.YELLOW + Style.BRIGHT + "¡No se encontró documentación previa!")
+    print(Fore.YELLOW + Style.BRIGHT + "Iniciando la descarga de la documentación desde:")
+    print(Fore.YELLOW + Style.BRIGHT + f"{BASE_URL}")
+    print(Fore.YELLOW + Style.BRIGHT + "==========================================\n")
+    
+    crawl_all(BASE_URL)
+    
+    # Mensaje final indicando que la descarga se completó
+    print("\n" + Fore.GREEN + Style.BRIGHT + "==========================================")
+    print(Fore.GREEN + Style.BRIGHT + "Descarga completada.")
+    print(Fore.GREEN + Style.BRIGHT + "==========================================\n")
