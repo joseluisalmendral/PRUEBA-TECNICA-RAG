@@ -14,7 +14,7 @@ except ImportError:
 BASE_URL = "https://docs.chainlit.io/"
 OUTPUT_DIR = "chainlit_docs"
 OUTPUT_FORMAT = "txt"  # Cambia a "md" para Markdown
-REQUEST_DELAY = 0.3  # Tiempo de espera entre peticiones en segundos
+REQUEST_DELAY = 0.1  # Tiempo de espera entre peticiones en segundos
 
 visited = set()
 

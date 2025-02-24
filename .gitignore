@@ -3,8 +3,11 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-#evitar conf de chainlit
+# evitar conf de chainlit
 *.chainlit
+
+# evitar archivos subidos a chainlit
+*.files
 
 # autoreload para los .ipynb
 # %load_ext autoreload

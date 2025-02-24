@@ -1,4 +1,5 @@
 import os
+import subprocess
 import string
 import nltk
 from nltk.corpus import stopwords
@@ -9,6 +10,10 @@ from qdrant_client import QdrantClient
 from qdrant_client.http.models import PointStruct, VectorParams, Distance
 import openai
 import chainlit as cl
+
+# Comprobar si el directorio 'chainlit_docs' existe, si no, ejecutar el script de descarga.
+if not os.path.exists("chainlit_docs"):
+    subprocess.run(["python", "download_chainlit_docs.py"], check=True)
 
 openai.api_key = os.getenv('OPENAI_API_KEY')
 
@@ -116,7 +121,7 @@ def generate_response(query: str, context_docs: List[Dict]) -> str:
 # Frontend con Chainlit
 @cl.on_chat_start
 async def start():
-    await cl.Message(content="¡Bienvenido al sistema RAG para la documentación de Chainlit! En qué puedo ayudarte?").send()
+    await cl.Message(content="¡Bienvenido al sistema RAG para la documentación de Chainlit! ¿En qué puedo ayudarte?").send()
 
 @cl.on_message
 async def main(message: cl.Message):
